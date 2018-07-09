@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import Dexie from 'dexie';
 
-import 'dexie-observable';
-import 'dexie-syncable';
+import observable from 'dexie-observable';
+import syncable from 'dexie-syncable';
 
 
 interface Friend {
@@ -18,10 +18,11 @@ export class DexieService extends Dexie {
   public friends!: Dexie.Table<Friend, string>;
 
   constructor() {
-    super("FriendDatabase", { addons: [Dexie.Observable, Dexie.Syncable] });
+    super("FriendDatabase", { addons: [observable, syncable] });
     this.version(1).stores({
       friends: "$$id,name,age"
     });
+    console.log('init....');
   }
 
   add() {
